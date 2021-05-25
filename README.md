@@ -1,3 +1,11 @@
+## Important Considerations.
+<u>Routing</u> : using React Router Dom.
+        <i>Installation :</i> npm install react-route-dom
+        Raps the whole application into route. Check <a href="https://reactrouter.com/native/guides/quick-start">Routing using React Router Dom</a> for more.
+<u>Components</u> : using Styled Components (styled-components lets you write actual CSS in your JavaScript.) How Cool!
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
 ## Available Scripts
