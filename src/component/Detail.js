@@ -61,7 +61,9 @@ opacity:0.78;
 
 `
 const ImgHeading = styled.div`
-    height: 30vw;
+    height: 23vw;
+    padding-top:20px;
+    padding-bottom:15px;
     width:35vw;
     min-height:170px;
     min-width:200px;
@@ -142,5 +144,6 @@ const Description = styled(SubTitle)`
 line-height:1.4;
 font-size:16px;
 margin-top:16px;
-
+max-width:760px;
 `
+//Given Descripton a parameter of type subtitile. 
