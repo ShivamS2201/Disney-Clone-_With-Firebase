@@ -5,17 +5,17 @@ function Viewers(){
     return(
         <Container>
             <Wrap >
-                <img src="/images/viewers-disney.png" />
+                <img src="/images/viewers-disney.png" alt="Disney"  />
             </Wrap>
             <Wrap >
-                <img src="/images/viewers-pixar.png" />
+                <img src="/images/viewers-pixar.png" alt="Pixar" />
                 
             </Wrap>
             <Wrap >
-                <img src="/images/viewers-marvel.png" />
+                <img src="/images/viewers-marvel.png" alt="Marvel" />
             </Wrap>
             <Wrap >
-                <img src="/images/viewers-starwars.png" />
+                <img src="/images/viewers-starwars.png" alt="Starwars" />
             </Wrap>
             <Wrap >
                 <img src="/images/viewers-national.png" />
@@ -35,7 +35,7 @@ padding:30px 0 26px;
 //fr is strtech as much as you can
 const Wrap = styled.div`
     border-radius:10px;
-    padding-top: 56.25%;
+    
     border: 3px solid rgb(249,249,249,0.1); 
     overflow: hidden;
   position: relative;
