@@ -79,7 +79,7 @@ opacity:0.78;
         width:100%;
         height:100%;
         object-fit:cover;
-    @media (max-width: 768px) {
+        @media (max-width: 768px) {
             width: initial;
           }
         
