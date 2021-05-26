@@ -18,8 +18,8 @@ Raps the whole application into route. Check <a href="https://reactrouter.com/na
      <td>MOVIE DESCRIPTION</td>
   </tr>
   <tr>
-    <td><img src="https://github.com/ShivamS2201/Disney-Clone-_With-Firebase/blob/main/public/images/disney+mobile%202.png?raw=true" height=300px width=auto></img></td>
     <td><img src="https://github.com/ShivamS2201/Disney-Clone-_With-Firebase/blob/main/public/images/disney+mobile.png?raw=true" height=300px width=auto ></img></td>
+    <td><img src="https://github.com/ShivamS2201/Disney-Clone-_With-Firebase/blob/main/public/images/disney+mobile%202.png?raw=true" height=300px width=auto></img></td>
   </tr>
  </table>
 
