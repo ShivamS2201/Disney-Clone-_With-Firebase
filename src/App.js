@@ -5,10 +5,8 @@ import Home from './component/homepage'
 import Detail from './component/Detail'
 import Login from './component/Login'
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
+  BrowserRouter as Router, Route, Switch
+  
 } from "react-router-dom"
 function App() {
   return (
@@ -16,13 +14,14 @@ function App() {
       <Router>
       <Header />
       <Switch>
-        <Router path="/detail">
+      <Route path="/detail/:id" >
           <Detail />
-        </Router>
-        <Router path="/login">
+          </Route>
+        <Route path="/login">
           <Login />
-        </Router>
-        <Route path="/">
+        </Route>
+        
+         <Route path="/">
           <Home />
           </Route>
 

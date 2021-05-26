@@ -1,19 +1,22 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import {selectMovies} from '../features/movie/movieSlice'
+import { selectMovies } from '../features/movie/movieSlice'
+import { Link } from 'react-router-dom' //wraps the link around with an 'a' tag, links to route.
 
 function Movies(){
     const movies = useSelector(selectMovies); // Grab from store.
-
     return(
         <Container>
             <h4>Recommended For You</h4>
             <Content>
-            {   movies && movies.map((movie)=>(  
+            {   movies && movies.map((movie)=>(   //Because There is a wait in the request and fetch from db, We tell it to wait You can use Promises/async.
                               //If movies exist and fetch the db and send it to the wrap. 
-                    <Wrap key={movie.id}>                    
-                    <img src={movie.cardImg} alt="movies" />
+                    
+                    <Wrap key={movie.id}>  
+                        <Link to = {`/detail/${movie.id}`}>                  
+                            <img src={movie.cardImg} alt="movies" />
+                        </Link>
                     </Wrap>
                 ))
             }

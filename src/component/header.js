@@ -1,10 +1,64 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import styled from 'styled-components'
+import { selectUserName,selectUserPhoto,setUserLogin,setSignOut } from '../features/user/userslice'
+import { useDispatch,useSelector } from 'react-redux'
+import { auth, provider } from '../firebase'
+import { useHistory } from "react-router-dom"
+
 function Header(){
+    const dispatch = useDispatch();
+    const userName = useSelector(selectUserName);
+    const userPhoto = useSelector(selectUserPhoto);
+    const history = useHistory();
+
+    useEffect(()=>{
+        auth.onAuthStateChanged(async(user)=>{
+            if(user){
+                dispatch(setUserLogin({ //dispatch stores username and useremail in globalstate and username will be updated to new state of name, condition to falsi thus making nav then.
+                    name: user.displayName,
+                    email: user.email,
+                    photo: user.photoURL
+                }))
+                history.push("/")
+            }
+
+        })//Remembers user in as a cookie
+    })
+
+    const signIn = ()=>{
+        auth.signInWithPopup(provider)
+        .then((result)=>{
+            let user = result.user
+            dispatch(setUserLogin({ //dispatch stores username and useremail in globalstate and username will be updated to new state of name, condition to falsi thus making nav then.
+                name: user.displayName,
+                email: user.email,
+                photo: user.photoURL
+            })
+            );
+            history.push("/");
+        }
+        )
+    }
+
+    const signOut = ()=>{
+        auth.signOut()
+        .then(()=>{
+            dispatch(setSignOut()); //After this command is dispatched we will use History to come to The default Homepage.
+            history.push("/login");        
+        })
+
+    }
+
     return(
         <Nav>
             <Logo src="/images/logo.svg" />  
-            <NavMenu>
+            {!userName ? 
+                (<LoginContainer>
+                <Login onClick={signIn}>Login</Login>
+                </LoginContainer>
+                ) :
+                <>
+                <NavMenu>
                 <a>
                     <img src="/images/home-icon.svg" />
                     <span>HOME</span>
@@ -31,7 +85,11 @@ function Header(){
                 </a>
 
             </NavMenu>
-            <UserImg src="https://yt3.ggpht.com/yti/ANoDKi7Lxob7mTo87M_6TQG8ZXhYON3DLSOtVZ2T8d3N9g=s88-c-k-c0x00ffffff-no-rj-mo" />             
+            <UserImg onClick={signOut} 
+            src={userPhoto} />             
+            
+                </>
+            }
             
     
         </Nav>
@@ -48,6 +106,27 @@ const Nav = styled.nav`
     padding:0px 36px;
     
 
+`
+const LoginContainer = styled.div`
+flex:1;
+display:flex;
+justify-content:flex-end;
+`
+const Login = styled.button`
+border: 1px solid #f9f9f9;
+padding:8px 16px;
+border-radius:4px;  
+letter-spacing:1.5px;
+text-transform: uppercase;
+background-color:rgba(0,0,0,0.8);
+color:white;
+transition:all 250ms linear 0s;
+cursor:pointer;
+
+    &:hover{
+        background-color: #f9f9f9;
+        color:#000;
+    }
 `
 const Logo = styled.img`
 width:80px;height:80px; 

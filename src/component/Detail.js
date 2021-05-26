@@ -1,37 +1,61 @@
-import React from 'react'
+import React,{ useEffect,useState } from 'react'
 import styled from 'styled-components'
+import { useParams } from "react-router-dom"
+import db from '../firebase';
 
 function Detail(){
+
+    const {id} = useParams();
+    const [movie, setMovie] = useState()
+    useEffect(()=>{
+        db.collection("movies")
+        .doc(id)
+        .get()
+        .then((doc)=>{
+            if(doc.exists){ //save movie sata
+                setMovie(doc.data()) //We get the movie as object from database.
+
+            }else{
+                //redirect homepage or errer page.
+            }
+        })
+    },[id])
+    console.log(movie);
+
     return(
         <Container>
-            <Background>
-                <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/4F39B7E16726ECF419DD7C49E011DD95099AA20A962B0B10AA1881A70661CE45/scale?width=1440&aspectRatio=1.78&format=jpeg" alt="Background-details" />
+            {movie && ( //wrapper inside a container for wasy binding
+                <>
+                <Background>
+                <img src={movie.backgroundImg} alt="Background-details" />
             </Background>
-            <ImgHeading>
-            <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/D7AEE1F05D10FC37C873176AAA26F777FC1B71E7A6563F36C6B1B497CAB1CEC2/scale?width=1440&aspectRatio=1.78" alt="Image-Header"/>          
-            </ImgHeading>
+            <Heading>
+            <img src={movie.titleImg} alt="Image-Header"/>          
+            </Heading>
             <Controls>
                 <PlayButton>
-                    <img src="/images/play-icon-black.png" />
+                    <img alt="img" src="/images/play-icon-black.png"  />
                     <span>PLAY</span>
                 </PlayButton>
                 <TrailerButton>
-                <img src="/images/play-icon-white.png" />
+                <img alt="img" src="/images/play-icon-white.png" />
                     <span>TRAILER</span>
                 </TrailerButton>
                 <AddButton>
                     <span>+</span>
                 </AddButton>
                 <GroupWatchButton>
-                    <img src="/images/group-icon.png" alt="GroupIcon" />
+                    <img alt="img" src="/images/group-icon.png" alt="GroupIcon" />
                 </GroupWatchButton>
             </Controls>
             <SubTitle>
-            Super Awesome ~ i have just ~ seen thi
+            {movie.subTitle}
             </SubTitle>
-        <Description>Qazi! I heard you'll be doing some awesome projects this may! A great idea is to make react native clones of all clever programmer react builds🔥
-            New age coder
-​           waitI thank youtube for the day I came across this channel. Between the three of these guys, this is probably the best beginner channel there is. thank so much nas!</Description>
+        <Description>{movie.description}</Description>
+        </>
+            )
+            }
+            
         </Container>
     )
 }
@@ -45,7 +69,7 @@ const Container = styled.div`
 `
 const Background = styled.div`
 position:fixed;
-top:0;
+top:0px;
 left:0;
 right:0;
 bottom:0;
@@ -55,12 +79,14 @@ opacity:0.78;
         width:100%;
         height:100%;
         object-fit:cover;
-        
+    @media (max-width: 768px) {
+            width: initial;
+          }
         
     }
 
 `
-const ImgHeading = styled.div`
+const Heading = styled.div`
     height: 23vw;
     padding-top:20px;
     padding-bottom:15px;
@@ -92,10 +118,22 @@ const PlayButton = styled.button`
   align-items: center;
     height:56px;
     background:rgb(249,249,249);
+    img {
+        width: 32px;
+      }
 
     &:hover{
         background: rgb(198,198,198)
     }
+    @media (max-width: 768px) {
+        height: 45px;
+        padding: 0px 12px;
+        font-size: 12px;
+        margin: 0px 10px 0px 0px;
+        img {
+          width: 25px;
+        }
+      }
 `
 const TrailerButton = styled(PlayButton)`
 border:rgba(249,249,249);
@@ -120,6 +158,16 @@ cursor: pointer;
 span{
     font-size: 30px;
     color: white;
+    &:first-child {
+        height: 2px;
+        transform: translate(1px, 0px) rotate(0deg);
+        width: 16px;
+      }
+      &:nth-child(2) {
+        height: 16px;
+        transform: translateX(-8px) rotate(0deg);
+        width: 2px;
+      }
 }
 `
 const GroupWatchButton = styled.button`
@@ -136,14 +184,21 @@ cursor: pointer;
 
 const SubTitle = styled.div`
 color:rgb(249,249,249);
-font-size:15px;
+font-size:12.5px;
 min-height:20px;
-margin-top:26px;
+margin-top:20px;
+@media (max-width: 768px) {
+    font-size: 12px;
+  }
+
 `
 const Description = styled(SubTitle)`
 line-height:1.4;
 font-size:16px;
 margin-top:16px;
 max-width:760px;
+@media (max-width: 768px) {
+    font-size: 14px;
+  }
 `
 //Given Descripton a parameter of type subtitile. 
