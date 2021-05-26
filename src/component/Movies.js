@@ -1,32 +1,23 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import {selectMovies} from '../features/movie/movieSlice'
 
 function Movies(){
+    const movies = useSelector(selectMovies); // Grab from store.
+
     return(
         <Container>
-            <h4>
-
-            Recommended For You
-            </h4>
-
+            <h4>Recommended For You</h4>
             <Content>
-                <Wrap>
-                    <img src="/images/viewers-marvel.png" alt="Movie"/>
-                </Wrap>
-                <Wrap>
-                    <img src="/images/viewers-marvel.png" alt="Movie"/>
-                </Wrap>
-                <Wrap>
-                    <img src="/images/viewers-marvel.png" alt="Movie"/>
-                </Wrap>
-                <Wrap>
-                    <img src="/images/viewers-marvel.png" alt="Movie"/>
-                </Wrap>
-                
-
-
-
-            </Content>
+            {   movies && movies.map((movie)=>(  
+                              //If movies exist and fetch the db and send it to the wrap. 
+                    <Wrap key={movie.id}>                    
+                    <img src={movie.cardImg} alt="movies" />
+                    </Wrap>
+                ))
+            }
+        </Content>
         </Container>
 
     )
@@ -35,7 +26,7 @@ function Movies(){
 export default Movies
 
 const Container = styled.div`
-
+margin-bottom:7px;
 
 `
 const Content = styled.div`
