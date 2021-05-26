@@ -55,10 +55,9 @@ overflow-x:hidden;
 }
 
 `
-// before->position is absolute to main which is its relative left,right,top bottom to set it cover, center ,center to help it. Is always fixed.
-//z-index to make in the back.
-//vh-vertical height, calc-calculates, vw-vertical width
-
-/*  ABOUT DB
-id, description, title, cardImg
+/*  before->position is absolute to main which is its relative left,right,top bottom to set it cover, center ,center to help it. Is always fixed.
+z-index to make in the back.
+vh-vertical height, calc-calculates, vw-vertical width
+ABOUT DB
+id, description, title, cardImg,background
 */
