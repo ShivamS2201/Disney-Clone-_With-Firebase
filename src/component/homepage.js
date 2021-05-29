@@ -14,7 +14,7 @@ import { setMovies } from '../features/movie/movieSlice' //Method to put in our 
 //Redux manages the database. 
 //Reduces the Passing of data from one call to anoher
 function Home(){
-    const dispatch = useDispatch();
+    const dispatch = useDispatch(); //eslint-disable-next-line
 
     useEffect(()=>{
         db.collection("movies").onSnapshot((snapshot)=>{
@@ -25,7 +25,7 @@ function Home(){
             dispatch(setMovies(tempMovies));
         }) //Snapshot->Whenevercall is done Database, static picture is sent to us.
     }
-    , [])
+    , [dispatch])
     return(     
         <Container>
             <ImgSlider />
